@@ -38,7 +38,187 @@ section{padding:86px 0}.head{text-align:center;max-width:760px;margin:0 auto 44p
 .contact{display:grid;grid-template-columns:.8fr 1.2fr .8fr;gap:25px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(135deg,#0d1010,#15120c);padding:34px}
 .contact h2{margin-top:0}.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{background:#0b0d0d;border:1px solid #44423b;border-radius:5px;padding:13px;color:#888}.field.big{grid-column:1/-1;min-height:92px}.benefits{display:grid;gap:14px;align-content:center;color:#e9e5dc;font-size:14px}.benefits div:before{content:"✓";color:var(--gold);font-weight:900;margin-right:9px}
 footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0 50px}.footer{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:13px}
-.notice{font-size:12px;color:#777;margin-top:16px}
+..notice{font-size:12px;color:#777;margin-top:16px}
+
+/* PRISER */
+
+.pricing-section{padding-top:10px}
+
+.pricing{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:18px;
+
+margin-top:35px
+
+}
+
+.price-card{
+
+position:relative;
+
+background:linear-gradient(145deg,#0d1010,#12110c);
+
+border:1px solid rgba(224,181,38,.34);
+
+border-radius:14px;
+
+padding:32px 27px;
+
+display:flex;
+
+flex-direction:column;
+
+min-height:390px
+
+}
+
+.price-card.gold{
+
+border:1px solid var(--gold);
+
+box-shadow:0 18px 55px rgba(224,181,38,.10);
+
+transform:translateY(-8px)
+
+}
+
+.popular{
+
+position:absolute;
+
+top:-13px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+background:var(--gold);
+
+color:#111;
+
+font-size:10px;
+
+font-weight:900;
+
+letter-spacing:.12em;
+
+padding:6px 14px;
+
+border-radius:20px;
+
+white-space:nowrap
+
+}
+
+.price-card h3{
+
+font-size:22px;
+
+margin:4px 0 5px
+
+}
+
+.price{
+
+font-size:38px;
+
+font-weight:900;
+
+color:var(--gold);
+
+letter-spacing:-.04em;
+
+margin:8px 0 2px
+
+}
+
+.price-small{
+
+font-size:12px;
+
+color:var(--muted);
+
+margin-bottom:22px
+
+}
+
+.price-card ul{
+
+list-style:none;
+
+padding:0;
+
+margin:0 0 25px
+
+}
+
+.price-card li{
+
+padding:8px 0;
+
+font-size:14px;
+
+color:#e9e5dc;
+
+border-bottom:1px solid rgba(255,255,255,.06)
+
+}
+
+.price-card li:before{
+
+content:"✓";
+
+color:var(--gold);
+
+font-weight:900;
+
+margin-right:9px
+
+}
+
+.price-card .btn{
+
+margin-top:auto
+
+}
+
+.form input,
+
+.form textarea{
+
+width:100%;
+
+font:inherit;
+
+outline:none
+
+}
+
+.form textarea{
+
+resize:vertical
+
+}
+
+.form input:focus,
+
+.form textarea:focus{
+
+border-color:var(--gold);
+
+color:#fff
+
+}
+
+@media(max-width:900px){
+
+.pricing{grid-template-columns:1fr}
+
+.price-card.gold{transform:none}
 @media(max-width:900px){.links{display:none}.quickgrid{grid-template-columns:1fr 1fr}.quickitem:nth-child(2){border-right:0}.process{grid-template-columns:1fr 1fr}.case{grid-template-columns:1fr}.casevisual{min-height:320px}.contact{grid-template-columns:1fr}}
 @media(max-width:620px){.hero{min-height:760px}.hero:before{background-position:68% center;background-size:auto 100%}.hero:after{background:linear-gradient(90deg,#070909 0%,rgba(7,9,9,.92) 55%,rgba(7,9,9,.35) 100%),linear-gradient(0deg,#070909 0%,transparent 35%)}.hero .wrap{padding-top:70px}.quick{margin-top:-30px}.quickgrid{grid-template-columns:1fr}.quickitem{border-right:0;border-bottom:1px solid rgba(255,255,255,.08)}.process{grid-template-columns:1fr}.contact{padding:24px}.form{grid-template-columns:1fr}.field.big{grid-column:auto}.nav .btn{padding:11px 13px;font-size:12px}.brand strong{font-size:17px}}
 </style>
@@ -51,48 +231,299 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0 50px}.footer{di
 </div></nav>
 
 <header class="hero">
+  
 <div class="wrap">
 <div class="ey">Nettsider som</div>
 <h1>bygger <span>bedrifter.</span></h1>
 <p class="lead">Moderne, raske og mobiltilpassede nettsider for håndverkere og lokale bedrifter. Skreddersydd design. Enkelt å bruke. Bygget for å gjøre et profesjonelt førsteinntrykk.</p>
 <div class="actions"><a class="btn" href="#kontakt">FÅ ET UFORPLIKTENDE FORSLAG →</a><a class="btn ghost" href="#prosjekt">SE PROSJEKTER →</a></div>
 <div class="local"><span><b class="dot">⌖</b> Laget i Rjukan</span><span><b class="dot">△</b> Inspirert av Gaustatoppen</span><span><b class="dot">♡</b> Bygget for Norge</span></div>
+</div><div class="quick" id="tjenester">
+
+  <div class="wrap quickgrid">
+
+    <div class="quickitem">
+
+      <div class="ico">▯</div>
+
+      <strong>Mobil først</strong>
+
+      <p>Nettsider som ser profesjonelle ut og fungerer like godt på mobil, nettbrett og PC.</p>
+
+    </div>
+
+    <div class="quickitem">
+
+      <div class="ico">◴</div>
+
+      <strong>Rask & effektiv</strong>
+
+      <p>Ryddige og raske nettsider med fokus på en enkel og god brukeropplevelse.</p>
+
+    </div>
+
+    <div class="quickitem">
+
+      <div class="ico">⚒</div>
+
+      <strong>Skreddersydd design</strong>
+
+      <p>Ingen bedrifter er like. Derfor tilpasses uttrykket til bedriften, faget og kundene dine.</p>
+
+    </div>
+
+    <div class="quickitem">
+
+      <div class="ico">↗</div>
+
+      <strong>Bygget for vekst</strong>
+
+      <p>En profesjonell nettside som gjør det enkelt for nye kunder å finne deg og ta kontakt.</p>
+
+    </div>
+
+  </div>
+
 </div>
+
+<section id="prosess">
+
+  <div class="wrap">
+
+    <div class="head">
+
+      <div class="ey">Fra idé til ferdig nettside</div>
+
+      <h2>Enkelt. Oversiktlig. Trygt.</h2>
+
+    </div>
+
+    <div class="process">
+
+      <div class="step">
+
+        <div class="circle">◯</div>
+
+        <strong>1. PRAT</strong>
+
+        <p>Vi tar en uforpliktende prat om bedriften din, hva du trenger og hva du ønsker å oppnå.</p>
+
+      </div>
+
+      <div class="step">
+
+        <div class="circle">▤</div>
+
+        <strong>2. PLAN</strong>
+
+        <p>Jeg lager en tydelig plan og et forslag til hvordan nettsiden kan bygges opp.</p>
+
+      </div>
+
+      <div class="step">
+
+        <div class="circle">✎</div>
+
+        <strong>3. DESIGN</strong>
+
+        <p>Nettsiden får et moderne uttrykk som passer bedriften og kundene dine.</p>
+
+      </div>
+
+      <div class="step">
+
+        <div class="circle">&lt;/&gt;</div>
+
+        <strong>4. BYGG</strong>
+
+        <p>Jeg bygger nettsiden og sørger for at den fungerer godt på både mobil og PC.</p>
+
+      </div>
+
+      <div class="step">
+
+        <div class="circle">↗</div>
+
+        <strong>5. PUBLISER</strong>
+
+        <p>Når du er fornøyd, gjør vi nettsiden klar og publiserer den.</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="prosjekt">
+
+  <div class="wrap">
+
+    <article class="case">
+
+      <div class="casecopy">
+
+        <div class="tag">PÅGÅENDE PROSJEKT</div>
+
+        <h2>Tinn Utvikling AS</h2>
+
+        <p class="muted">
+
+          Et moderne nettsidekonsept for Tinn Utvikling AS, med fokus på en ryddig og profesjonell presentasjon av eiendom og utleie i Tinn.
+
+          Prosjektet er under utvikling og blir et av de første prosjektene i MLF Digital sin portefølje.
+
+        </p>
+
+        <a class="btn ghost" href="#">
+
+          SE PROSJEKTET →
+
+        </a>
+
+      </div>
+
+      <div class="casevisual">
+
+        <div class="screen"></div>
+
+        <div class="phone"></div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+<section id="kontakt">
+
+  <div class="wrap">
+
+    <div class="contact">
+
+      <div>
+
+        <div class="ey">Kontakt</div>
+
+        <h2>
+
+          Klar for en nettside som
+
+          <span style="color:var(--gold)">jobber for deg?</span>
+
+        </h2>
+
+        <p class="muted">
+
+          Fortell litt om bedriften din og hva du trenger.
+
+          Du trenger ikke ha alt planlagt – jeg hjelper deg med å finne en løsning som passer.
+
+        </p>
+
+      </div>
+
+      <div>
+
+        <div class="form">
+
+          <div class="field">Navn</div>
+
+          <div class="field">E-post</div>
+
+          <div class="field">Telefon</div>
+
+          <div class="field">Bedriftens navn</div>
+
+          <div class="field big">
+
+            Fortell kort om bedriften din og hva du ønsker hjelp med…
+
+          </div>
+
+        </div>
+
+        <div class="actions">
+
+          <span class="btn">
+
+            FÅ ET UFORPLIKTENDE FORSLAG →
+
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="benefits">
+
+        <div>✓ Gratis og uforpliktende forslag</div>
+
+        <div>✓ Personlig oppfølging</div>
+
+        <div>✓ Tydelig pris før oppstart</div>
+
+        <div>✓ Ingen skjulte kostnader</div>
+
+      </div>
+
+    </div>
+
+    <p class="notice">
+
+      Kontaktskjemaet er foreløpig kun visuelt. Det kobles til ekte e-post før nettsiden publiseres.
+
+    </p>
+
+  </div>
+
+</section>
+
+<footer>
+
+  <div class="wrap footer">
+
+    <div class="brand">
+
+      <span>
+
+        <strong>MLF</strong> DIGITAL
+
+      </span>
+
+    </div>
+
+    <div>
+
+      Nettsider som bygger bedrifter.
+
+    </div>
+
+    <div>
+
+      mlfdigital.no
+
+    </div>
+
+    <div>
+
+      © 2026 MLF Digital
+
+    </div>
+
+  </div>
+
+</footer>
+
+</body>
+
+</html>
 </header>
 
 <div class="quick" id="tjenester"><div class="wrap quickgrid">
 <div class="quickitem"><div class="ico">▯</div><strong>Mobil først</strong><p>Bygget for å se bra ut på alle skjermer.</p></div>
 <div class="quickitem"><div class="ico">◴</div><strong>Rask & effektiv</strong><p>Ryddige nettsider med fokus på god brukeropplevelse.</p></div>
 <div class="quickitem"><div class="ico">⚒</div><strong>Skreddersydd design</strong><p>Et uttrykk som speiler bedriften og faget.</p></div>
-<div class="quickitem"><div class="ico">↗</div><strong>Bygget for vekst</strong><p>En nettside som gjør det enkelt å bli funnet og kontaktet.</p></div>
-</div></div>
-
-<section id="prosess"><div class="wrap">
-<div class="head"><div class="ey">Fra idé til ferdig nettside</div><h2>Enkelt. Oversiktlig. Trygt.</h2></div>
-<div class="process">
-<div class="step"><div class="circle">◯</div><strong>1. PRAT</strong><p>Vi tar en uforpliktende prat om behov og mål.</p></div>
-<div class="step"><div class="circle">▤</div><strong>2. PLAN</strong><p>Vi lager en plan og et forslag til løsning.</p></div>
-<div class="step"><div class="circle">✎</div><strong>3. DESIGN</strong><p>Vi designer et moderne og brukervennlig nettsted.</p></div>
-<div class="step"><div class="circle">&lt;/&gt;</div><strong>4. BYGG</strong><p>Vi bygger nettsiden raskt og ryddig.</p></div>
-<div class="step"><div class="circle">↗</div><strong>5. PUBLISER</strong><p>Vi gjør den klar for lansering.</p></div>
-</div>
-</div></section>
-
-<section id="prosjekt"><div class="wrap">
-<article class="case">
-<div class="casecopy"><div class="tag">Demo prosjekt</div><h2>Tinn Utvikling AS</h2><p class="muted">Et moderne nettsidekonsept for presentasjon av eiendom og utleie i Tinn. Prosjektet er fortsatt under utvikling og brukes foreløpig som demo.</p><a class="btn ghost" href="#">SE DEMOSIDEN →</a></div>
-<div class="casevisual"><div class="screen"></div><div class="phone"></div></div>
-</article>
-</div></section>
-
-<section id="kontakt"><div class="wrap">
-<div class="contact">
-<div><div class="ey">Kontakt</div><h2>Klar for en nettside som <span style="color:var(--gold)">jobber for deg?</span></h2></div>
-<div><div class="form"><div class="field">Navn</div><div class="field">E-post</div><div class="field">Telefon</div><div class="field">Bedriftens navn</div><div class="field big">Fortell kort om prosjektet eller hva du trenger hjelp med…</div></div><div class="actions"><span class="btn">SEND MELDING →</span></div></div>
-<div class="benefits"><div>Gratis og uforpliktende forslag</div><div>Personlig oppfølging</div><div>Tydelig pris før oppstart</div><div>100 % fokus på din bedrift</div></div>
-</div>
-<p class="notice">Kontaktskjemaet er foreløpig kun visuelt. Det kobles til ekte e-post før publisering.</p>
-</div></section>
-
-<footer><div class="wrap footer"><div class="brand"><span><strong>MLF</strong> DIGITAL</span></div><div>Nettsider som bygger bedrifter.</div><div>mlfdigital.no</div><div>© 2026 MLF Digital</div></div></footer>
-</body></html>
