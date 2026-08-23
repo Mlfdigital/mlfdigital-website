@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tinn Utvikling AS | Eiendom på Rjukan og i Tinn</title>
+  <meta name="description" content="Tinn Utvikling AS – eiendom, utleie, forvaltning og utvikling på Rjukan og i Tinn." />
+  <style>
+    :root{
+      --bg:#090a0b;
+      --panel:#101214;
+      --panel2:#151719;
+      --gold:#c89b3c;
+      --gold2:#e0ba68;
+      --text:#f4f0e8;
+      --muted:#a7a39b;
+      --line:#2a2d30;
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.55}
+    a{color:inherit;text-decoration:none}
+    img{display:block;width:100%;height:100%;object-fit:cover}
+    .wrap{width:min(var(--max),92%);margin:auto}
+    .serif{font-family:Georgia,'Times New Roman',serif}
+    .eyebrow{color:var(--gold2);text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:700}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border:1px solid var(--gold);padding:.95rem 1.35rem;font-weight:700;font-size:.85rem;letter-spacing:.04em;transition:.25s;background:transparent;color:var(--text)}
+    .btn:hover{background:var(--gold);color:#0a0a0a;transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#101010;border:none}
+    header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(7,8,9,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+    nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+    .brand{display:flex;align-items:center;gap:.8rem;min-width:max-content}
+    .mark{width:42px;height:42px;border:2px solid var(--gold);display:grid;place-items:center;font-family:Georgia,serif;font-weight:700;color:var(--gold2);font-size:1.2rem}
+    .brand strong{display:block;letter-spacing:.08em}
+    .brand small{display:block;color:var(--gold2);font-size:.62rem;letter-spacing:.12em}
+    .links{display:flex;align-items:center;gap:1.5rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+    .links a{opacity:.82}
+    .links a:hover{color:var(--gold2);opacity:1}
+    .menu-btn{display:none;background:none;color:#fff;border:1px solid var(--line);padding:.65rem .8rem}
+
+    .hero{min-height:760px;padding-top:76px;position:relative;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--line)}
+    .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,5,6,.96) 0%,rgba(4,5,6,.8) 35%,rgba(4,5,6,.18) 68%,rgba(4,5,6,.08) 100%),url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=85') center/cover no-repeat;transform:scale(1.01)}
+    .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 65%,rgba(8,9,10,.8) 100%)}
+    .hero-content{position:relative;z-index:2;max-width:670px;padding:5rem 0}
+    h1{font-size:clamp(3.2rem,6vw,6.2rem);line-height:.94;margin:.55rem 0 1.35rem;font-weight:400;letter-spacing:-.035em}
+    .lead{font-size:1.05rem;color:#d1ccc3;max-width:610px}
+    .hero-actions{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:2rem}
+
+    .services{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+    .service{padding:2rem;border-right:1px solid var(--line);background:linear-gradient(180deg,#0d0f10,#0a0b0c)}
+    .service:last-child{border-right:0}
+    .icon{font-size:1.6rem;color:var(--gold2);margin-bottom:.6rem}
+    .service h3{font-family:Georgia,serif;font-weight:400;margin:.2rem 0 .35rem;font-size:1.15rem}
+    .service p{margin:0;color:var(--muted);font-size:.9rem}
+
+    section{padding:5.8rem 0;border-bottom:1px solid var(--line)}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:2.1rem}
+    h2{font-size:clamp(2.2rem,4vw,4rem);line-height:1.02;margin:.35rem 0 0;font-weight:400;letter-spacing:-.02em}
+    .link-arrow{color:var(--gold2);font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .card{position:relative;height:360px;overflow:hidden;border:1px solid var(--line);background:#111}
+    .card img{transition:.45s}
+    .card:hover img{transform:scale(1.04)}
+    .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 38%,rgba(0,0,0,.9) 100%)}
+    .card-copy{position:absolute;left:1.25rem;right:1.25rem;bottom:1.15rem}
+    .card-copy small{color:var(--gold2);font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+    .card-copy h3{font-family:Georgia,serif;font-size:1.45rem;font-weight:400;margin:.35rem 0 0}
+
+    .story-grid{display:grid;grid-template-columns:1.05fr .95fr;min-height:500px}
+    .story-image{position:relative;min-height:460px;background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat}
+    .story-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.15),rgba(0,0,0,.55))}
+    .story-overlay{position:absolute;z-index:2;right:2rem;bottom:2rem;max-width:330px;background:rgba(8,9,10,.75);backdrop-filter:blur(8px);padding:1.5rem;border:1px solid rgba(255,255,255,.12)}
+    .story-copy{padding:3.2rem;background:#0f1112;display:flex;flex-direction:column;justify-content:center}
+    .story-copy p{color:var(--muted)}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem;padding-top:1.7rem;border-top:1px solid var(--line)}
+    .stat strong{display:block;color:var(--gold2);font-size:1.3rem}
+    .stat span{display:block;color:#bbb6ae;font-size:.78rem;margin-top:.25rem}
+
+    .contact-band{display:flex;justify-content:space-between;align-items:center;gap:2rem;background:linear-gradient(90deg,#0b0c0d,#16191b);padding:3.2rem;border:1px solid var(--line)}
+    .contact-band h2{font-size:clamp(2rem,3vw,3.2rem);margin:.2rem 0}
+    footer{padding:3rem 0 1.2rem;background:#070809}
+    .footer-grid{display:grid;grid-template-columns:1.4fr .8fr 1fr 1fr;gap:2rem;padding-bottom:2rem;border-bottom:1px solid var(--line)}
+    .footer-grid h4{color:var(--gold2);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;margin:0 0 1rem}
+    .footer-grid p,.footer-grid a{display:block;color:#aaa69e;font-size:.87rem;margin:.35rem 0}
+    .copyright{display:flex;justify-content:space-between;gap:1rem;color:#6f6c67;font-size:.75rem;padding-top:1rem}
+
+    @media(max-width:900px){
+      .links{display:none;position:absolute;top:76px;left:0;right:0;background:#0a0b0c;padding:1rem 4%;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
+      .links.open{display:flex}.menu-btn{display:block}.nav-cta{display:none}
+      .hero{min-height:680px}.hero:before{background:linear-gradient(180deg,rgba(4,5,6,.35) 0%,rgba(4,5,6,.72) 45%,rgba(4,5,6,.98) 100%),url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=85') center/cover no-repeat;background-position:63% center}
+      .hero-content{padding-top:16rem}
+      .services{grid-template-columns:1fr 1fr}.service:nth-child(2){border-right:0}.service{border-bottom:1px solid var(--line)}
+      .cards{grid-template-columns:1fr}.card{height:330px}
+      .story-grid{grid-template-columns:1fr}.story-copy{padding:2rem}.stats{grid-template-columns:1fr 1fr}
+      .footer-grid{grid-template-columns:1fr 1fr}.contact-band{align-items:flex-start;flex-direction:column}
+    }
+    @media(max-width:560px){
+      nav{height:68px}.hero{padding-top:68px}.brand strong{font-size:.83rem}.brand small{font-size:.52rem}.mark{width:36px;height:36px}
+      .hero-content{padding-top:13rem}.hero .eyebrow{font-size:.7rem}h1{font-size:3.45rem}.lead{font-size:.95rem}
+      .services{grid-template-columns:1fr}.service{border-right:0}.section-head{align-items:flex-start;flex-direction:column}
+      section{padding:4rem 0}.story-image{min-height:380px}.story-overlay{left:1rem;right:1rem;bottom:1rem}.stats{grid-template-columns:1fr 1fr}
+      .footer-grid{grid-template-columns:1fr}.copyright{flex-direction:column}.contact-band{padding:2rem}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#forside"><span class="mark">TU</span><span><strong>TINN UTVIKLING</strong><small>EIENDOM MED VERDIER</small></span></a>
+      <div class="links" id="navLinks">
+        <a href="#forside">Forside</a><a href="#eiendommer">Eiendommer</a><a href="#utleie">Utleie</a><a href="#om">Om oss</a><a href="#kontakt">Kontakt</a>
+      </div>
+      <a class="btn nav-cta" href="#kontakt">Ta kontakt</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Åpne meny">MENY</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="forside">
+    <div class="wrap"><div class="hero-content">
+      <div class="eyebrow">Tinn Utvikling AS</div>
+      <h1 class="serif">Eiendom med beliggenhet, kvalitet og langsiktighet.</h1>
+      <p class="lead">Vi utvikler, forvalter og leier ut bolig-, leilighets- og næringseiendommer på Rjukan og i Tinn.</p>
+      <div class="hero-actions"><a class="btn primary" href="#eiendommer">Se våre eiendommer</a><a class="btn" href="#kontakt">Ta kontakt</a></div>
+    </div></div>
+  </section>
+
+  <div class="services" id="utleie">
+    <div class="service"><div class="icon">⌂</div><h3>Bolig og leiligheter</h3><p>Moderne og funksjonelle boliger med attraktive beliggenheter.</p></div>
+    <div class="service"><div class="icon">▥</div><h3>Næringseiendom</h3><p>Lokaler tilpasset ulike bransjer og virksomheter.</p></div>
+    <div class="service"><div class="icon">◉</div><h3>Utleie og forvaltning</h3><p>Profesjonell forvaltning og effektiv oppfølging av eiendom.</p></div>
+    <div class="service"><div class="icon">↗</div><h3>Eiendomsutvikling</h3><p>Langsiktig utvikling med fokus på kvalitet og verdi.</p></div>
+  </div>
+
+  <section id="eiendommer">
+    <div class="wrap">
+      <div class="section-head"><div><div class="eyebrow">Utvalgte eiendommer</div><h2 class="serif">Attraktive eiendommer i Tinn</h2></div><a class="link-arrow" href="#kontakt">Forespør om tilgjengelighet →</a></div>
+      <div class="cards">
+        <article class="card"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80" alt="Moderne bolig"><div class="shade"></div><div class="card-copy"><small>Leiligheter</small><h3>Moderne leiligheter på Rjukan</h3></div></article>
+        <article class="card"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80" alt="Næringseiendom"><div class="shade"></div><div class="card-copy"><small>Næringseiendom</small><h3>Næringslokaler sentralt på Rjukan</h3></div></article>
+        <article class="card"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1000&q=80" alt="Bolig"><div class="shade"></div><div class="card-copy"><small>Bolig</small><h3>Boliger med flotte omgivelser i Tinn</h3></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="om" style="padding:0">
+    <div class="story-grid">
+      <div class="story-image"><div class="story-overlay"><div class="eyebrow">Lokalt forankret</div><h2 class="serif" style="font-size:2.4rem">Rjukan og Tinn er vårt hjem</h2><p style="color:#c8c2b8">Vi kjenner området, menneskene og mulighetene. Vår lokale tilstedeværelse gir oss nærhet og korte beslutningsveier.</p></div></div>
+      <div class="story-copy"><div class="eyebrow">Om Tinn Utvikling</div><h2 class="serif">Langsiktig. Lokal. Fremoverlent.</h2><p>Tinn Utvikling AS ble etablert i 2011 og arbeider med eiendom, utleie og forvaltning. Med base på Rjukan ønsker vi å skape gode løsninger og langsiktige verdier.</p>
+        <div class="stats"><div class="stat"><strong>2011</strong><span>Etablert</span></div><div class="stat"><strong>Rjukan</strong><span>Lokal base</span></div><div class="stat"><strong>Bolig</strong><span>og næring</span></div><div class="stat"><strong>Langsiktig</strong><span>perspektiv</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt"><div class="wrap"><div class="contact-band"><div><div class="eyebrow">Kontakt oss</div><h2 class="serif">La oss snakke om ditt neste prosjekt</h2><p style="color:var(--muted);margin:0">Ta kontakt om samarbeid, utleie eller eiendom.</p></div><a class="btn" href="#kontakt" onclick="alert('Kontaktinformasjon legges inn før publisering.'); return false;">Ta kontakt i dag →</a></div></div></section>
+</main>
+
+<footer><div class="wrap"><div class="footer-grid">
+  <div><a class="brand" href="#forside"><span class="mark">TU</span><span><strong>TINN UTVIKLING AS</strong><small>EIENDOM MED VERDIER</small></span></a></div>
+  <div><h4>Meny</h4><a href="#forside">Forside</a><a href="#eiendommer">Eiendommer</a><a href="#utleie">Utleie</a><a href="#om">Om oss</a><a href="#kontakt">Kontakt</a></div>
+  <div><h4>Kontaktinfo</h4><p>Sam Eydes gate 97 A</p><p>3660 Rjukan</p><p>[Telefonnummer]</p><p>[E-postadresse]</p></div>
+  <div><h4>Selskapsinformasjon</h4><p>Tinn Utvikling AS</p><p>Org.nr. 996 535 126</p><p>Etablert i 2011</p></div>
+</div><div class="copyright"><span>© 2026 Tinn Utvikling AS. Alle rettigheter reservert.</span><span>Demo – innhold og bilder må kvalitetssikres før publisering.</span></div></div></footer>
+
+<script>
+  const btn=document.getElementById('menuBtn'); const links=document.getElementById('navLinks');
+  btn.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+</script>
+</body>
+</html>
