@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Trafikken i Rjukan – Visit Rjukan</title>
+<style>
+:root{--sol:#f2b632;--natt:#0e2a47;--bg:#f5f6f8;--kort:#fff;--blekk:#0f1b2d;--mute:#6b7686;--linje:#e6e9ee;--bla:#0e2a47;--bla2:#d7e5f6;--gull:#f2b632;--gronn:#14895a;--rod:#c4452f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--blekk);font:15px/1.5 -apple-system,"Segoe UI",Inter,system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 40px}
+.merke{display:flex;align-items:center;gap:12px;background:var(--natt);color:#fff;border-radius:18px;padding:16px 20px;margin-bottom:18px;justify-content:space-between;flex-wrap:wrap}
+.merke .navn{display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px;letter-spacing:.01em}
+.merke .sol{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#fff3c4,var(--sol) 60%,#e08a1e);box-shadow:0 0 18px rgba(242,182,50,.7)}
+.merke small{display:block;font-weight:500;font-size:12px;opacity:.7;letter-spacing:.08em;text-transform:uppercase}
+.merke .av{font-size:12px;opacity:.75}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+h1{font-size:28px;letter-spacing:-.02em}
+.under{color:var(--mute);font-size:14px}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--mute);background:#fff;border:1px solid var(--linje);padding:6px 12px;border-radius:99px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--gronn)}
+.kontroll{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;background:var(--kort);border:1px solid var(--linje);border-radius:16px;padding:16px;margin-bottom:16px}
+.kontroll label{display:flex;flex-direction:column;gap:5px;font-size:12px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+select,input{font:500 15px inherit;font-family:inherit;color:var(--blekk);border:1px solid var(--linje);border-radius:10px;padding:9px 11px;background:#fff;min-width:0}
+.knapp{background:var(--blekk);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:600 14px inherit;font-family:inherit;cursor:pointer}
+.knapp.lys{background:#fff;color:var(--blekk);border:1px solid var(--linje)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.kort{background:var(--kort);border:1px solid var(--linje);border-radius:16px;padding:18px 20px}
+.kort h2{font-size:13px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.tall{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.tall small{font-size:15px;font-weight:500;color:var(--mute);margin-left:4px;letter-spacing:0}
+.sml{margin-top:10px;font-size:14px;color:var(--mute)}
+.pil{font-weight:700}.opp{color:var(--gronn)}.ned{color:var(--rod)}
+.retn{display:grid;gap:10px}
+.retn div{display:flex;justify-content:space-between;align-items:center;font-size:15px}
+.retn b{font-size:22px}
+.bar{height:6px;border-radius:9px;background:var(--bla2);margin-top:4px;overflow:hidden}.bar span{display:block;height:100%;background:var(--sol)}
+.graf-topp{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.forklaring{display:flex;gap:16px;font-size:13px;color:var(--mute)}
+.forklaring span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-2px;background:#1f5fa8}
+.forklaring span.ifjor::before{background:none;border-top:3px dashed var(--natt);height:0;border-radius:0;vertical-align:3px}
+svg{width:100%;height:auto;display:block}
+.søyle{cursor:pointer}
+.søyle:hover rect.s{opacity:.8}
+.uke{width:100%;border-collapse:collapse;font-size:14px}
+.uke th{text-align:left;color:var(--mute);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;padding:8px 6px;border-bottom:1px solid var(--linje)}
+.uke td{padding:9px 6px;border-bottom:1px solid var(--linje)}
+.uke td.r{text-align:right;font-variant-numeric:tabular-nums}
+.uke tr:last-child td{border-bottom:0;font-weight:700}
+.laster{opacity:.45;transition:opacity .2s}
+.feil{background:#fff3f1;border:1px solid #f2c9c1;color:#8a2b1c;padding:12px 16px;border-radius:12px;margin-bottom:16px;display:none}
+footer{margin-top:22px;color:var(--mute);font-size:12.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:820px){.grafvindu{overflow-x:auto;-webkit-overflow-scrolling:touch}#graf{min-width:680px}.grid{grid-template-columns:1fr}.tall{font-size:34px}h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="merke"><div class="navn"><span class="sol"></span><div>Visit Rjukan<small>Trafikkoversikt</small></div></div><span class="av">Laget for Visit Rjukan av MLF Digital</span></div>
+<header>
+  <div><h1>Trafikken i Rjukan</h1><div class="under" id="punktbesk">Antall kjøretøy per time, målt av Statens vegvesen</div></div>
+  <span class="status"><i></i><span id="oppdatert">Henter tall …</span></span>
+</header>
+
+<div class="kontroll">
+  <label>Målepunkt<select id="punkt"><option value="88410V521413">Rjukan sentrum (Fv37)</option><option value="24150V521411">Rettlinja – mot Møsvatn (Fv37)</option></select></label>
+  <label>Dato<input type="date" id="dato"></label>
+  <label>Klokkeslett<select id="time"></select></label>
+  <label>Sammenlign med<select id="sml"><option value="dato">Samme dato i fjor</option><option value="ukedag">Samme ukedag i fjor</option></select></label>
+  <button class="knapp lys" id="naa">Nå</button>
+</div>
+<div class="feil" id="feil"></div>
+
+<div id="innhold">
+<div class="grid">
+  <div class="kort"><h2 id="t1">Valgt time</h2><div class="tall" id="v1">–</div><div class="sml" id="s1"></div></div>
+  <div class="kort"><h2 id="t2">Hele dagen</h2><div class="tall" id="v2">–</div><div class="sml" id="s2"></div></div>
+  <div class="kort"><h2>Retning, valgt time</h2><div class="retn" id="retn"></div></div>
+</div>
+
+<div class="kort" style="margin-bottom:16px">
+  <div class="graf-topp"><h2 style="margin:0" id="graftittel">Time for time</h2><div class="forklaring"><span id="lbl1">Valgt dag</span><span class="ifjor" id="lbl2">I fjor</span></div></div>
+  <div class="grafvindu"><svg id="graf" viewBox="0 0 960 300" role="img" aria-label="Biler per time"></svg></div>
+  <div class="sml" style="margin-top:6px">Trykk på en søyle for å se den timen.</div>
+</div>
+
+<div class="kort">
+  <h2>Siste 7 dager</h2>
+  <table class="uke"><thead><tr><th>Dag</th><th class="r" style="text-align:right">Biler</th><th style="text-align:right">I fjor</th><th style="text-align:right">Endring</th></tr></thead><tbody id="uke"></tbody></table>
+</div>
+</div>
+
+<footer><span>Kilde: Statens vegvesen, trafikkdata.no – Norsk lisens for offentlige data (NLOD). Tall oppdateres hver time.</span><span>Laget av MLF Digital</span></footer>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const UKEDAG=['søn','man','tir','ons','tor','fre','lør'],MND=['jan','feb','mar','apr','mai','jun','jul','aug','sep','okt','nov','des'];
+const pad=n=>String(n).padStart(2,'0');
+function osloIdag(){const p=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Oslo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',hour12:false}).formatToParts(new Date());const g=t=>p.find(x=>x.type===t).value;return {dato:`${g('year')}-${g('month')}-${g('day')}`,time:+g('hour')%24}}
+function off(d){const s=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Oslo',timeZoneName:'shortOffset'}).formatToParts(new Date(d+'T12:00:00Z')).find(x=>x.type==='timeZoneName').value;const m=s.match(/GMT([+-])(\d+)/);return m?`${m[1]}${pad(m[2])}:00`:'+01:00'}
+function plussDager(d,n){const t=new Date(d+'T12:00:00Z');t.setUTCDate(t.getUTCDate()+n);return t.toISOString().slice(0,10)}
+function iFjor(d,modus){if(modus==='ukedag')return plussDager(d,-364);const [y,m,dd]=d.split('-');let ny=`${y-1}-${m}-${dd}`;if(m==='02'&&dd==='29')ny=`${y-1}-02-28`;return ny}
+function iso(d,h){return `${d}T${pad(h)}:00:00${off(d)}`}
+function pent(d){const t=new Date(d+'T12:00:00Z');return `${UKEDAG[t.getUTCDay()]} ${t.getUTCDate()}. ${MND[t.getUTCMonth()]} ${t.getUTCFullYear()}`}
+const fmt=n=>n==null?'–':n.toLocaleString('nb-NO');
+const API='https://trafikkdata-api.atlas.vegvesen.no/',viaJarvis=location.hostname.startsWith('jarvis.');
+async function hent(p,fra,til){
+  if(viaJarvis){const r=await fetch(`/trafikk/data?p=${p}&fra=${encodeURIComponent(fra)}&til=${encodeURIComponent(til)}`);const j=await r.json();if(!r.ok)throw new Error(j.error||'Kunne ikke hente tall');return j.timer}
+  const ut=[];let etter='';
+  for(let i=0;i<12;i++){
+    const q=`{trafficData(trafficRegistrationPointId:"${p}"){volume{byHour(from:"${fra}",to:"${til}"${etter?`,after:"${etter}"`:''}){edges{node{from total{volumeNumbers{volume} coverage{percentage}} byDirection{heading total{volumeNumbers{volume}}}}} pageInfo{hasNextPage endCursor}}}}}`;
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});if(!r.ok)throw new Error('vegvesenet svarer ikke');
+    const j=await r.json();if(j.errors)throw new Error(j.errors[0].message);
+    const bh=j.data?.trafficData?.volume?.byHour||{};
+    (bh.edges||[]).forEach(e=>{const n=e.node,ret={};(n.byDirection||[]).forEach(d=>ret[d.heading]=d.total?.volumeNumbers?.volume);ut.push({t:n.from,total:n.total?.volumeNumbers?.volume??null,retning:ret})});
+    if(!bh.pageInfo?.hasNextPage)break;etter=String(bh.pageInfo.endCursor).replace(/[^A-Za-z0-9+/=_-]/g,'')}
+  return ut}
+function perTime(rader){const m={};rader.forEach(r=>{const h=+r.t.slice(11,13);m[h]=r});return m}
+function endring(a,b){if(a==null||b==null||!b)return '';const p=Math.round((a-b)/b*100);return `<span class="pil ${p>=0?'opp':'ned'}">${p>=0?'▲':'▼'} ${Math.abs(p)} %</span>`}
+function sum(m,til){let s=0,n=0;for(let h=0;h<=til;h++){if(m[h]&&m[h].total!=null){s+=m[h].total;n++}}return n?s:null}
+
+let valgtTime=0,data={},forsteGang=true;
+const sisteTime=m=>{const t=Object.keys(m).map(Number).filter(h=>m[h].total!=null);return t.length?Math.max(...t):-1};
+for(let h=0;h<24;h++)$('#time').insertAdjacentHTML('beforeend',`<option value="${h}">kl. ${pad(h)}–${pad((h+1)%24)}</option>`);
+function settNaa(){const n=osloIdag();$('#dato').value=n.dato;$('#dato').max=n.dato;valgtTime=Math.max(0,n.time-1);$('#time').value=valgtTime}
+
+async function last(){
+  const p=$('#punkt').value,d=$('#dato').value,modus=$('#sml').value,f=iFjor(d,modus);
+  $('#innhold').classList.add('laster');$('#feil').style.display='none';
+  try{
+    const [a,b,u,uf]=await Promise.all([hent(p,iso(d,0),iso(plussDager(d,1),0)),hent(p,iso(f,0),iso(plussDager(f,1),0)),
+      hent(p,iso(plussDager(d,-6),0),iso(plussDager(d,1),0)),hent(p,iso(plussDager(f,-6),0),iso(plussDager(f,1),0))]);
+    data={d,f,a:perTime(a),b:perTime(b),u,uf};const n=osloIdag(),st=sisteTime(data.a);
+    if(d===n.dato&&(forsteGang||!data.a[valgtTime])&&st>=0){valgtTime=st;$('#time').value=st}forsteGang=false;tegn();
+    $('#oppdatert').textContent=d===n.dato?(st>=0?`I dag · siste målte time kl. ${pad(st)}–${pad(st+1)}`:'I dag · ingen tall ennå'):`Viser ${pent(d)}`;
+  }catch(e){$('#feil').textContent='Klarte ikke å hente tallene akkurat nå: '+e.message+'. Prøv igjen om litt.';$('#feil').style.display='block'}
+  $('#innhold').classList.remove('laster')}
+
+function tegn(){
+  const {d,f,a,b}=data,h=valgtTime,n=osloIdag(),idag=d===n.dato;
+  const va=a[h]?.total,vb=b[h]?.total;
+  $('#t1').textContent=`Kl. ${pad(h)}–${pad((h+1)%24)}, ${pent(d)}`;
+  $('#v1').innerHTML=va==null?'<span style="font-size:20px;color:var(--mute)">Ikke målt ennå</span>':`${fmt(va)}<small>biler</small>`;
+  $('#s1').innerHTML=`${pent(f)}: <b>${fmt(vb)}</b> ${endring(va,vb)}`;
+  if(va==null){const st0=sisteTime(a);$('#v1').innerHTML='<span style="font-size:20px;color:var(--mute)">Ingen tall ennå</span>';
+    $('#s1').innerHTML=idag&&h>st0?`Vegvesenet legger ut tallene 2–3 timer etterpå.${st0>=0?` <a href="#" id="hopp" style="color:var(--blekk);font-weight:600">Vis siste målte time (kl. ${pad(st0)}–${pad(st0+1)}) →</a>`:''}<br>I fjor samme time: <b>${fmt(vb)}</b>`:`Det finnes ingen måling for denne timen. I fjor: <b>${fmt(vb)}</b>`;
+    const hp=document.getElementById('hopp');if(hp)hp.onclick=e=>{e.preventDefault();valgtTime=st0;$('#time').value=st0;tegn()}}
+  const til=idag?sisteTime(a):23;
+  $('#t2').textContent=idag?`I dag fram til kl. ${pad(til+1)}`:`Hele ${pent(d)}`;
+  const sa=sum(a,til),sb=sum(b,til);
+  $('#v2').innerHTML=`${fmt(sa)}<small>biler</small>`;
+  $('#s2').innerHTML=`Samme tidsrom i fjor: <b>${fmt(sb)}</b> ${endring(sa,sb)}`;
+  const r=a[h]?.retning||{},tot=Object.values(r).reduce((x,y)=>x+(y||0),0)||1;
+  $('#retn').innerHTML=Object.keys(r).length?Object.entries(r).map(([k,v])=>`<div><span>Mot ${k}</span><b>${fmt(v)}</b></div><div class="bar"><span style="width:${(v||0)/tot*100}%"></span></div>`).join(''):'<div class="sml">Ingen tall for denne timen ennå.</div>';
+  $('#lbl1').textContent=pent(d);$('#lbl2').textContent=pent(f);
+  // graf
+  const W=960,H=300,pl=40,pb=28,pt=12,bw=(W-pl)/24,maks=Math.max(10,...[...Object.values(a),...Object.values(b)].map(x=>x.total||0));
+  const y=v=>H-pb-(v/maks)*(H-pb-pt);
+  let s='';for(let i=0;i<=4;i++){const v=Math.round(maks*i/4),yy=y(v);s+=`<line x1="${pl}" x2="${W}" y1="${yy}" y2="${yy}" stroke="#e6e9ee"/><text x="${pl-8}" y="${yy+4}" text-anchor="end" font-size="11" fill="#6b7686">${v}</text>`}
+  for(let i=0;i<24;i++){const v=a[i]?.total,x=pl+i*bw;s+=`<g class="søyle" data-h="${i}"><rect x="${x}" y="${pt}" width="${bw}" height="${H-pb-pt}" fill="transparent"/>${v!=null?`<rect class="s" x="${x+3}" y="${y(v)}" width="${bw-6}" height="${H-pb-y(v)}" rx="3" fill="${i===h?'#f2b632':'#1f5fa8'}"/>`:''}${i%2===0?`<text x="${x+bw/2}" y="${H-9}" text-anchor="middle" font-size="11" fill="#6b7686">${pad(i)}</text>`:''}</g>`}
+  const pk=[];for(let i=0;i<24;i++)if(b[i]?.total!=null)pk.push(`${pl+i*bw+bw/2},${y(b[i].total)}`);
+  s+=`<polyline points="${pk.join(' ')}" fill="none" stroke="#0e2a47" stroke-width="2.5" stroke-dasharray="6 4" stroke-linejoin="round"/>`+pk.map(p=>`<circle cx="${p.split(',')[0]}" cy="${p.split(',')[1]}" r="3" fill="#0e2a47"/>`).join('');
+  $('#graf').innerHTML=s;
+  document.querySelectorAll('.søyle').forEach(g=>g.onclick=()=>{valgtTime=+g.dataset.h;$('#time').value=valgtTime;tegn()});
+  // uke
+  const dag=rader=>{const m={};rader.forEach(r=>{const k=r.t.slice(0,10);if(r.total!=null)m[k]=(m[k]||0)+r.total});return m};
+  const st=sisteTime(a);const dag2=(rader,dagen,maks)=>rader.filter(r=>r.t.slice(0,10)===dagen&&+r.t.slice(11,13)<=maks&&r.total!=null).reduce((x,r)=>x+r.total,0);
+  const du=dag(data.u),df=dag(data.uf);if(idag){df[f]=dag2(data.uf,f,st)}let su=0,sf=0,rad='';
+  for(let i=6;i>=0;i--){const dd=plussDager(d,-i),ff=plussDager(f,-i),x=du[dd],z=df[ff];su+=x||0;sf+=z||0;rad+=`<tr><td>${pent(dd)}${dd===n.dato?' (så langt)':''}</td><td class="r">${fmt(x)}</td><td class="r">${fmt(z)}</td><td class="r">${endring(x,z)}</td></tr>`}
+  rad+=`<tr><td>Totalt</td><td class="r">${fmt(su)}</td><td class="r">${fmt(sf)}</td><td class="r">${endring(su,sf)}</td></tr>`;$('#uke').innerHTML=rad;
+}
+const besk={'88410V521413':'Rjukan sentrum, Fv37 – alle kjøretøy gjennom sentrum, time for time','24150V521411':'Rettlinja, Fv37 – biler mellom Rjukan og Møsvatn/Rauland'};
+$('#punkt').onchange=()=>{$('#punktbesk').textContent=besk[$('#punkt').value];last()};
+$('#dato').onchange=last;$('#sml').onchange=last;
+$('#time').onchange=()=>{valgtTime=+$('#time').value;tegn()};
+$('#naa').onclick=()=>{settNaa();forsteGang=true;last()};
+settNaa();$('#punktbesk').textContent=besk[$('#punkt').value];last();
+setInterval(()=>{if($('#dato').value===osloIdag().dato)last()},10*60*1000);
+</script>
+</body>
+</html>
