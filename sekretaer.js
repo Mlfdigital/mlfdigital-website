@@ -69,6 +69,7 @@
     "@keyframes inn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}" +
     "@keyframes prikk{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}" +
     "@keyframes puls{0%{box-shadow:0 12px 34px rgba(0,0,0,.45),0 0 0 0 rgba(212,165,74,.55)}100%{box-shadow:0 12px 34px rgba(0,0,0,.45),0 0 0 22px rgba(212,165,74,0)}}" +
+    "@media (max-width:980px){.panel{bottom:calc(MBpx + 76px);height:min(600px,calc(100vh - MBpx - 100px))}.boble{bottom:MBpx}.hint{bottom:calc(MBpx + 10px)}}" +
     "@media (max-width:520px){.panel{right:0;left:0;bottom:0;width:100%;max-width:none;height:calc(100dvh - 60px);border-radius:22px 22px 0 0}.boble{right:16px;bottom:MBpx}.boble.aapen{opacity:0;pointer-events:none}.hint{right:86px;bottom:calc(MBpx + 10px)}}" +
     "@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}";
   var stil = document.createElement("style");
